@@ -1,0 +1,63 @@
+{
+  "schema_version": "v1.0",
+  "_doc": "Zenn 記事の元ネタ(失敗テーマ)。generate_zenn_article.py が status=todo を1つ選び記事化し drafted にする。固有名・実Secret名・個人数値は入れない(sanitized)。30選(drafts/s5-failure-index/30-candidates.md)の章立てに対応。",
+  "themes": [
+    {
+      "id": "z001",
+      "status": "drafted",
+      "article": "cron-silent-fail-6months.md",
+      "title_hint": "GitHub Actions cron が緑のまま静かに止まる",
+      "chapter": "自動実行",
+      "lesson": "監視すべきは『落ちたか』ではなく『仕事をしたか』。空成功を失敗に変える。",
+      "topics": ["githubactions", "cron", "ci", "個人開発", "失敗談"]
+    },
+    {
+      "id": "z002",
+      "status": "todo",
+      "title_hint": "Secrets / PAT の権限不足に、push して初めて気づく",
+      "chapter": "環境構築",
+      "lesson": "権限はローカルでなく実行環境で検証する。最小権限 + 事前 dry-run。",
+      "topics": ["githubactions", "security", "個人開発"]
+    },
+    {
+      "id": "z003",
+      "status": "todo",
+      "title_hint": "複数 LLM の model 名をハードコードして一斉に壊れる",
+      "chapter": "API・モデル選定",
+      "lesson": "model 名は env/設定に集約。deprecation 前提で鮮度チェックを定例化。",
+      "topics": ["llm", "api", "claude", "個人開発"]
+    },
+    {
+      "id": "z004",
+      "status": "todo",
+      "title_hint": "自動生成コンテンツが『AIっぽさ』で一括りに見抜かれる",
+      "chapter": "量産コンテンツ",
+      "lesson": "テンプレ硬直を型ローテと実データ注入で崩す。固定の締めをやめる。",
+      "topics": ["生成ai", "個人開発", "ライティング"]
+    },
+    {
+      "id": "z005",
+      "status": "todo",
+      "title_hint": "自分で作ったルールを、同じ日に自分で破る",
+      "chapter": "自己改修",
+      "lesson": "ルールは文章でなく機械検知に落とさないと守られない。",
+      "topics": ["個人開発", "自動化", "ci"]
+    },
+    {
+      "id": "z006",
+      "status": "todo",
+      "title_hint": "AI への指示が曖昧で『早合点した提案』が返り続ける",
+      "chapter": "委任・対人",
+      "lesson": "曖昧入力は曖昧出力。前提・制約・受入条件を先に固定する。",
+      "topics": ["ai", "claude", "プロンプト", "個人開発"]
+    },
+    {
+      "id": "z007",
+      "status": "todo",
+      "title_hint": "真実の在り処(SoT)が二重化して、どっちが正か分からなくなる",
+      "chapter": "自己改修",
+      "lesson": "同じ情報を2箇所に置かない。置くなら一方を必ず生成物にする。",
+      "topics": ["個人開発", "設計", "ドキュメント"]
+    }
+  ]
+}

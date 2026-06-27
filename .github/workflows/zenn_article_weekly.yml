@@ -1,0 +1,62 @@
+name: zenn-article-weekly
+
+# 失敗テーマから Zenn 記事を週次生成し、「公開承認 PR」を自動で開く。
+# スマホ承認動線: GitHub アプリに PR の push 通知 → PR を開く → Merge を押す
+#   → main に入り Zenn が数秒で自動公開。Close すれば非公開のまま。
+# ※このワークフローは zenn-content が独立リポになった時に有効化される
+#   (canon 内のサブディレクトリにある間は GitHub は実行しない)。
+#
+# 前提(一度だけ): リポ Settings → Actions → General →
+#   「Allow GitHub Actions to create and approve pull requests」を ON。
+
+on:
+  schedule:
+    - cron: "0 21 * * 2"   # JST 火 06:00 (UTC 火 21:00)
+  workflow_dispatch:
+    inputs:
+      n:
+        description: "生成本数 (default 1)"
+        required: false
+        default: "1"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      CLAUDE_MODEL: claude-opus-4-7
+      ZENN_PER_RUN: ${{ github.event.inputs.n }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install anthropic
+
+      - name: Generate Zenn article(s)
+        run: python scripts/generate_zenn_article.py
+
+      - name: Open approval PR (スマホ = Merge を押せば公開)
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: zenn-draft/auto
+          delete-branch: true
+          commit-message: "zenn: 公開承認待ちドラフト"
+          title: "📗 公開承認: Zenn 失敗ラボ記事"
+          assignees: kikimi-02-cmd
+          labels: zenn-approval
+          body: |
+            ## スマホ承認動線（GitHub アプリで完結）
+
+            1. 下の **Files changed** で記事を確認
+            2. OK → このPRの **Merge** を押す
+               → `main` に入り **Zenn が数秒で自動公開**
+            3. ダメ → **Close**（公開されない）
+
+            記事は `published: true`。**マージ = 承認 = 公開**、未マージ = 非公開。
+            修正したい時は GitHub アプリ上で該当ファイルを編集してから Merge。
