@@ -33,7 +33,7 @@
     },
     {
       "id": "z003",
-      "status": "todo",
+      "status": "drafted",
       "title_hint": "複数 LLM の model 名をハードコードして一斉に壊れる",
       "chapter": "API・モデル選定",
       "lesson": "model 名は env/設定に集約。deprecation 前提で鮮度チェックを定例化。",
@@ -42,7 +42,9 @@
         "api",
         "claude",
         "個人開発"
-      ]
+      ],
+      "drafted_at": "2026-07-08T07:17:30+09:00",
+      "article": "z003-llm-model-deprecation.md"
     },
     {
       "id": "z004",
