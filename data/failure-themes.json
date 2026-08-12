@@ -76,7 +76,7 @@
     },
     {
       "id": "z006",
-      "status": "todo",
+      "status": "drafted",
       "title_hint": "AI への指示が曖昧で『早合点した提案』が返り続ける",
       "chapter": "委任・対人",
       "lesson": "曖昧入力は曖昧出力。前提・制約・受入条件を先に固定する。",
@@ -85,7 +85,9 @@
         "claude",
         "プロンプト",
         "個人開発"
-      ]
+      ],
+      "drafted_at": "2026-08-12T06:56:37+09:00",
+      "article": "z006-ai-failure-note.md"
     },
     {
       "id": "z007",
