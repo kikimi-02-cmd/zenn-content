@@ -13,7 +13,7 @@ note(拡散) / Substack(メール所有) の上流 = 検索・開発者コミュ
 
 Environment:
   ANTHROPIC_API_KEY  — 必須(未設定ならスキップ)
-  CLAUDE_MODEL       — 任意(default: claude-opus-4-7)
+  CLAUDE_MODEL       — 任意(default: claude-sonnet-5)
   ZENN_PER_RUN       — 任意(default: 1)
 """
 from __future__ import annotations
@@ -92,10 +92,15 @@ def _call_claude(prompt: str) -> str:
     import anthropic
 
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-    model = os.getenv("CLAUDE_MODEL", "claude-opus-4-7")
+    model = os.getenv("CLAUDE_MODEL", "claude-sonnet-5")
     msg = client.messages.create(
         model=model,
         max_tokens=4096,
+        # Sonnet 5 turns adaptive thinking on when `thinking` is omitted, where
+        # Opus 4.7 left it off (canon protocols/model-allocation-v1.md). max_tokens
+        # is the combined thinking + output ceiling, so an implicit default would
+        # cut the article short. Draft generation does not need visible reasoning.
+        thinking={"type": "disabled"},
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": prompt}],
     )
