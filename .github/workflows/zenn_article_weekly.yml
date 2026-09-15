@@ -10,8 +10,9 @@ name: zenn-article-weekly
 #   「Allow GitHub Actions to create and approve pull requests」を ON。
 
 on:
-  schedule:
-    - cron: "0 21 * * 2"   # JST 火 06:00 (UTC 火 21:00)
+# 2026-09-14 Telegram 断捨離 (Owner 決裁): 定期実行を停止。再開はコメント解除 1 PR。
+#   schedule:
+#     - cron: "0 21 * * 2"   # JST 火 06:00 (UTC 火 21:00)
   workflow_dispatch:
     inputs:
       n:
